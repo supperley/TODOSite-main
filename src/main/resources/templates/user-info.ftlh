@@ -15,13 +15,13 @@
     <h1 style="text-align: center">Обзоры пользователя ${user.name}</h1>
     <br>
     <div class="card-columns">
-                    <#list reviews as review>
-                        <a href="/review/${review.id}" class="review-link">
-                            <div class="card text-white bg-dark my-3 review">
-                                <img src="/images/${review.previewImageId}"
+                    <#list reviews as task>
+                        <a href="/task/${task.id}" class="task-link">
+                            <div class="card text-white bg-dark my-3 task">
+                                <img src="/images/${task.previewImageId}"
                                      class="card-img-top">
                                 <div class="card-body">
-                                    <h5 class="card-title">${review.title}</h5>
+                                    <h5 class="card-title">${task.title}</h5>
                                 </div>
                             </div>
                         </a>

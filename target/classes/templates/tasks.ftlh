@@ -28,9 +28,9 @@
                 </div>
             </form>
         </aside>
+    <#list tasks as task>
         <div class="col-9" id="masonry" data-masonry='{"percentPosition": true }'>
             <div class="row">
-            <#list reviews as task>
                 <div class="col-sm-6 col-lg-4 mb-4">
                     <a href="/task/${task.id}" class="task-link">
                         <div class="card text-black bg-light my-9 task">
@@ -50,10 +50,10 @@
                         </div>
                     </a>
                 </div>
-            <#else>
-                <h1 style="text-align: center">Не найдено</h1>
-            </#list>
             </div>
         </div>
+    <#else>
+        <h1 class="col-9" style="text-align: center">Не найдено</h1>
+    </#list>
     </div>
 </@t.template>

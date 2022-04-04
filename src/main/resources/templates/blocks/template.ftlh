@@ -51,7 +51,7 @@
                             <#if user.isAdmin()>
                                 <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
                             </#if>
-                            <li><a class="dropdown-item" href="/my/reviews">My Tasks</a></li>
+                            <li><a class="dropdown-item" href="/my/tasks">My tasks</a></li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
