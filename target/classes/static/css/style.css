@@ -1,0 +1,28 @@
+.review {
+    transition: 0.5s all;
+}
+
+.review:hover {
+    transform: scale(1.02);
+}
+
+.review-link {
+    color: #000 !important;
+    text-decoration: none;
+}
+
+.navbar-link {
+    text-decoration: none;
+}
+
+.buttons-wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 10%;
+}
+
+.profile-button {
+    min-width: 300px;
+    text-align: center;
+}
