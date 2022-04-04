@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByTitleLikeIgnoreCase(String title);
+    List<Task> findByPriority(Long priority);
     List<Task> findByUser(User user);
 }

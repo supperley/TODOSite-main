@@ -1,10 +1,10 @@
 package com.example.TODO_Site.services;
 
+import com.example.TODO_Site.models.Image;
 import com.example.TODO_Site.models.Task;
 import com.example.TODO_Site.models.User;
 import com.example.TODO_Site.repositories.TaskRepository;
 import com.example.TODO_Site.repositories.UserRepository;
-import com.example.TODO_Site.models.Image;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -22,13 +22,30 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
 
-    public List<Task> listTasks(String title) {
+    public List<Task> listTasks(String title, String priority) {
+        List<Task> result = taskRepository.findAll();
         if (title != null)
         {
             title = "%" + title + "%";
-            return taskRepository.findByTitleLikeIgnoreCase(title);
+            result = taskRepository.findByTitleLikeIgnoreCase(title);
         }
-        return taskRepository.findAll();
+        if (priority != null && !Objects.equals(priority, ""))
+        {
+            long priority_id = 0L;
+            switch (priority) {
+                case ("High"):
+                    priority_id = 3L;
+                    break;
+                case ("Medium"):
+                    priority_id = 2L;
+                    break;
+                case ("Low"):
+                    priority_id = 1L;
+                    break;
+            }
+            result = taskRepository.findByPriority(priority_id);
+        }
+        return result;
     }
 
     public void saveTask(Principal principal, Task task, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {

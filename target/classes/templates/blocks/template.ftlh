@@ -26,14 +26,20 @@
 <#--        <svg class="changeTheme" data-theme="dark" width="38" height="40" viewBox="0 0 38 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;"> <path d="M15 0.695136C15.244 0.991667 15.3935 1.35457 15.4292 1.73694C15.4648 2.11932 15.385 2.5036 15.2 2.84014C13.7546 5.49382 12.9998 8.46837 13.005 11.4901C13.005 21.5426 21.2 29.6826 31.3 29.6826C32.6175 29.6826 33.9 29.5451 35.1325 29.2826C35.5103 29.2008 35.9039 29.2321 36.264 29.3726C36.6241 29.5131 36.9349 29.7566 37.1575 30.0726C37.3925 30.4013 37.5123 30.7983 37.4983 31.2021C37.4842 31.6058 37.3372 31.9936 37.08 32.3051C35.1192 34.7137 32.6456 36.6544 29.8396 37.9856C27.0335 39.3168 23.9658 40.0051 20.86 40.0001C9.335 40.0001 0 30.7151 0 19.2751C0 10.6651 5.285 3.28014 12.81 0.150136C13.1848 -0.00828447 13.601 -0.0407995 13.9959 0.057475C14.3908 0.15575 14.7431 0.379507 15 0.695136V0.695136Z" fill="#222222"></path></svg>-->
 <#--    </div>-->
 
-    <header class="p-3 mb-3 border-bottom bg-light">
+    <header class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-3 border-bottom">
         <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                    <img class="bi me-2" width="40" height="32" src="../../static/images/logo.svg" alt="logo">
-                    <span class="navbar-brand">TODO Site</span>
-                </a>
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                <img class="bi me-2" width="40" height="32" src="../../static/images/logo.svg" alt="logo">
+                <span class="navbar-brand">TODO Site</span>
+            </a>
 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
                     <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
@@ -42,26 +48,25 @@
 
                 <#if user.email??>
                 <div class="dropdown text-end">
-                    <div class="d-flex align-items-center">
+                    <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle"
+                       id="dropdownUserLink" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="me-2">${user.name}</span>
-                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="/static/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser1" style="">
-                            <#if user.isAdmin()>
-                                <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
-                            </#if>
-                            <li><a class="dropdown-item" href="/my/tasks">My tasks</a></li>
-                            <li><a class="dropdown-item" href="/settings">Settings</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="/logout" method="post" class="dropdown-item">
-                                    <input type="hidden" class="form-control" name="_csrf" value="${_csrf.token}"/>
-                                    <button type="submit" class="btn btn-danger my-2 my-sm-0" style="width: 100%;">Выйти</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
+                        <img src="/static/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUserLink">
+                        <#if user.isAdmin()>
+                            <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
+                        </#if>
+                        <li><a class="dropdown-item" href="/my/tasks">My tasks</a></li>
+                        <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form action="/logout" method="post" class="mx-2">
+                                <input type="hidden" class="form-control" name="_csrf" value="${_csrf.token}"/>
+                                <button type="submit" class="btn btn-danger my-2 my-sm-0" style="width: 100%;">Выйти</button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
                 <#else>
                     <button class="btn btn-outline-primary me-2" type="button"

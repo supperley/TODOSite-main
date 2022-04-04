@@ -21,11 +21,14 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping("/")
-    public String index(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
-        model.addAttribute("tasks", taskService.listTasks(title));
+    public String index(@RequestParam(name = "priority", required = false) String priority,
+                        @RequestParam(name = "title", required = false) String title,
+                        Principal principal, Model model) {
+        model.addAttribute("tasks", taskService.listTasks(title, priority));
         User user = taskService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        model.addAttribute("searchWord", title);
+        model.addAttribute("title", title);
+        model.addAttribute("priority", priority);
         if (user.getId() == null) {
             return "index";
         } else {

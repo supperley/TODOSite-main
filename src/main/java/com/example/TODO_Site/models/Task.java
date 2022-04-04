@@ -22,8 +22,8 @@ public class Task {
     private Long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "group")
-    private String group;
+    @Column(name = "priority")
+    private Long priority;
     @Column(name = "tag")
     private String tag;
     @Column(name = "description", columnDefinition = "text")

@@ -26,10 +26,10 @@
                     <label for="searchGroup" class="col-form-label">Приоритет</label>
                     <select id="searchGroup" required name="group" class="form-select">
                         <option value="">Приоритет не выбран</option>
-                        <option value="Высокий">Высокий</option>
-                        <option value="Средний">Средний</option>
-                        <option value="Низкий">Низкий</option>
-                        <option value="Нет">Нет</option>
+                        <option value="High">Высокий</option>
+                        <option value="Medium">Средний</option>
+                        <option value="Low">Низкий</option>
+                        <option value="None">Нет</option>
                     </select>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                             </#if>
                             <div class="card-body">
                                 <h5 class="card-title">${task.title}</h5>
-                                <h6 class="card-title">${task.group}</h6>
+                                <h6 class="card-title">${task.priority}</h6>
                             </div>
                         </div>
                         </a>

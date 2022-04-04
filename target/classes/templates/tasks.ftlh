@@ -6,20 +6,20 @@
             <form method="get" action="/">
                 <div>
                     <label for="priority" class="col-form-label">Приоритет</label>
-                    <div class="">
-                        <select id="priority" class="form-select">
+                    <div>
+                        <select id="priority" class="form-select" name="priority">
                             <option value="">Приоритет не выбран</option>
-                            <option value="Высокий">Высокий</option>
-                            <option value="Средний">Средний</option>
-                            <option value="Низкий">Низкий</option>
-                            <option value="Нет">Нет</option>
+                            <option <#if priority?? && priority == "High">selected</#if> value="High">Высокий</option>
+                            <option <#if priority?? && priority == "Medium">selected</#if> value="Medium">Средний</option>
+                            <option <#if priority?? && priority == "Low">selected</#if> value="Low">Низкий</option>
+                            <option <#if priority?? && priority == "None">selected</#if> value="None">Нет</option>
                         </select>
                     </div>
                 </div>
                 <div>
                     <label class="col-form-label" for="title">Поиск среди задач</label>
                     <div class="">
-                        <input class="form-control" type="text" name="title" <#if searchWord??>value="${searchWord}"</#if>
+                        <input class="form-control" type="text" name="title" <#if title??>value="${title}"</#if>
                                id="title">
                     </div>
                 </div>
@@ -49,7 +49,21 @@
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">${task.title}</h5>
-                                                <h6 class="card-title">${task.group}</h6>
+                                                <h6 class="card-title">
+                                                    <#switch task.priority>
+                                                        <#case 3>
+                                                            High
+                                                            <#break>
+                                                        <#case 2>
+                                                            Medium
+                                                            <#break>
+                                                        <#case 1>
+                                                            Low
+                                                            <#break>
+                                                        <#default>
+                                                            None
+                                                    </#switch>
+                                                </h6>
                                             </div>
                                         </div>
                                     </div>
