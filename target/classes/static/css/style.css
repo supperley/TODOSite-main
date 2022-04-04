@@ -1,12 +1,12 @@
-.review {
+.task {
     transition: 0.5s all;
 }
 
-.review:hover {
+.task:hover {
     transform: scale(1.02);
 }
 
-.review-link {
+.task-link {
     color: #000 !important;
     text-decoration: none;
 }
@@ -25,4 +25,11 @@
 .profile-button {
     min-width: 300px;
     text-align: center;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    margin: auto;
 }
