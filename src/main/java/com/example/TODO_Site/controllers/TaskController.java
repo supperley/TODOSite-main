@@ -21,11 +21,16 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping("/")
-    public String tasks(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
+    public String index(@RequestParam(name = "title", required = false) String title, Principal principal, Model model) {
         model.addAttribute("tasks", taskService.listTasks(title));
-        model.addAttribute("user", taskService.getUserByPrincipal(principal));
+        User user = taskService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
         model.addAttribute("searchWord", title);
-        return "tasks";
+        if (user.getId() == null) {
+            return "index";
+        } else {
+            return "tasks";
+        }
     }
 
     @GetMapping("/task/{id}")
@@ -50,7 +55,12 @@ public class TaskController {
     public String deleteTask(@PathVariable Long id){
         taskService.deleteTask(id);
         return "redirect:/";
+    }
 
+    @PostMapping("/task/check/{id}")
+    public String checkTask(@PathVariable Long id){
+        taskService.checkTask(id);
+        return "redirect:/";
     }
 
     @GetMapping("/my/tasks")

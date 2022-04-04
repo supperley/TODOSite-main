@@ -30,7 +30,7 @@
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+                    <img class="bi me-2" width="40" height="32" src="../../static/images/logo.svg" alt="logo">
                     <span class="navbar-brand">TODO Site</span>
                 </a>
 
@@ -52,7 +52,7 @@
                                 <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
                             </#if>
                             <li><a class="dropdown-item" href="/my/tasks">My tasks</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="/settings">Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form action="/logout" method="post" class="dropdown-item">

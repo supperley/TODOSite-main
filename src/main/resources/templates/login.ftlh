@@ -1,29 +1,23 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <h1 style="text-align: center">Авторизация</h1>
-    <hr>
-    <div class="d-flex justify-content-around align-items-center">
-        <div class="col-md-8 col-lg-6 col-xl-4">
-            <form action="/login" method="post">
-                <div class="mb-3">
-                    <label for="email" class="form-label">Электронная почта</label>
-                    <input type="email" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="email" name="username">
-                    <div id="email" class="invalid-feedback">
-                        Неверная электронная почта
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Пароль</label>
-                    <input type="password" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="password" name="password">
-                    <div id="password" class="invalid-feedback">
-                        Неверный пароль
-                    </div>
-                </div>
-                <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <button type="submit" style="width: 100%" class="btn btn-dark">Войти</button>
-            </form>
-        </div>
-        <h4>Нет аккаунта? <a href="/registration">Зарегистрируйся!</a></h4>
-    </div>
-    <hr>
+    <main class="text-center form-signin p-3 p-lg-5 rounded-3 border shadow-lg">
+        <form action="/login" method="post">
+            <img class="mb-4" src="../static/images/logo.svg" alt="" width="72" height="57">
+            <h2 class="mb-4 fw-normal">Пожалуйста, войдите</h2>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="email" name="username" placeholder="name@example.com">
+                <label for="email">Электронная почта</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control <#if RequestParameters.error??>is-invalid</#if>" id="password" name="password" placeholder="Password">
+                <label for="password">Пароль</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary mb-5" type="submit">Войти</button>
+            <h5>Нет аккаунта? <a href="/registration">Зарегистрируйся!</a></h5>
+            <p class="mt-5 mb-3 text-muted">© 2022</p>
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+        </form>
+    </main>
 </@t.template>

@@ -121,7 +121,6 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-
     // security config
 
     @Override

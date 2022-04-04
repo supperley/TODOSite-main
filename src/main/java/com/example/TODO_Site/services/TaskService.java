@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -22,7 +23,11 @@ public class TaskService {
     private final UserRepository userRepository;
 
     public List<Task> listTasks(String title) {
-        if (title != null) return taskRepository.findByTitle(title);
+        if (title != null)
+        {
+            title = "%" + title + "%";
+            return taskRepository.findByTitleLikeIgnoreCase(title);
+        }
         return taskRepository.findAll();
     }
 
@@ -52,7 +57,6 @@ public class TaskService {
             else
             productFromDb.setPreviewImageId((long) -1);
         taskRepository.save(task);
-
     }
 
     public User getUserByPrincipal(Principal principal) {
@@ -72,6 +76,12 @@ public class TaskService {
 
     public void deleteTask(Long id){
         taskRepository.deleteById(id);
+    }
+
+    public void checkTask(Long id){
+        Task task = getTaskById(id);
+        task.setIsChecked(!task.getIsChecked());
+        taskRepository.save(task);
     }
 
     public Task getTaskById(Long id) {

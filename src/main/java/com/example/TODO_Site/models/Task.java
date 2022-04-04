@@ -28,6 +28,8 @@ public class Task {
     private String tag;
     @Column(name = "description", columnDefinition = "text")
     private String description;
+    @Column(name = "is_checked")
+    private Boolean isChecked;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,
             mappedBy = "task")
@@ -42,6 +44,7 @@ public class Task {
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();
+        isChecked = false;
     }
 
     public void addImageToTask(Image image){
