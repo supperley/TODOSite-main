@@ -4,6 +4,8 @@ import com.example.TODO_Site.models.Task;
 import com.example.TODO_Site.models.User;
 import com.example.TODO_Site.services.TaskService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.security.Principal;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class TaskController {
     private final TaskService taskService;
@@ -24,8 +28,8 @@ public class TaskController {
     public String index(@RequestParam(name = "priority", required = false) String priority,
                         @RequestParam(name = "title", required = false) String title,
                         Principal principal, Model model) {
-        model.addAttribute("tasks", taskService.listTasks(title, priority));
         User user = taskService.getUserByPrincipal(principal);
+        model.addAttribute("tasks", taskService.listTasks(user, title, priority));
         model.addAttribute("user", user);
         model.addAttribute("title", title);
         model.addAttribute("priority", priority);
@@ -38,10 +42,14 @@ public class TaskController {
 
     @GetMapping("/task/{id}")
     public String tasksInfo(@PathVariable Long id, Model model, Principal principal) {
+        User user = taskService.getUserByPrincipal(principal);
         Task task = taskService.getTaskById(id);
+        if (task.getUser() != user)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
         model.addAttribute("user", taskService.getUserByPrincipal(principal));
         model.addAttribute("tasks", task);
         model.addAttribute("images", task.getImages());
+        log.info("Task images: {}", task.getImages());
         model.addAttribute("authorTask", task.getUser());
         return "task-info";
     }

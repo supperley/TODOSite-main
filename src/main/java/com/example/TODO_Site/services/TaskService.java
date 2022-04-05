@@ -22,13 +22,10 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
 
-    public List<Task> listTasks(String title, String priority) {
-        List<Task> result = taskRepository.findAll();
-        if (title != null)
-        {
-            title = "%" + title + "%";
-            result = taskRepository.findByTitleLikeIgnoreCase(title);
-        }
+    public List<Task> listTasks(User user, String title, String priority) {
+        //List<Task> result = taskRepository.findAll();
+        List<Task> result = user.getProducts();
+
         if (priority != null && !Objects.equals(priority, ""))
         {
             long priority_id = 0L;
@@ -43,8 +40,21 @@ public class TaskService {
                     priority_id = 1L;
                     break;
             }
-            result = taskRepository.findByPriority(priority_id);
+
+            if (title != null) {
+                title = "%" + title + "%";
+                result = taskRepository.findByTitleLikeIgnoreCaseAndPriorityAndUser(title, priority_id, user);
+            } else {
+                result = taskRepository.findByPriorityAndUser(priority_id, user);
+            }
+            return result;
         }
+        if (title != null)
+        {
+            title = "%" + title + "%";
+            result = taskRepository.findByTitleLikeIgnoreCaseAndUser(title, user);
+        }
+
         return result;
     }
 
@@ -71,7 +81,7 @@ public class TaskService {
         if (file1.getSize() != 0) {
             productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
         }
-            else
+        else
             productFromDb.setPreviewImageId((long) -1);
         taskRepository.save(task);
     }

@@ -1,4 +1,4 @@
-<#macro template user>
+<#macro template user="">
     <!doctype html>
     <html lang="ru">
     <head>
@@ -45,32 +45,33 @@
                     <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
                     <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
                 </ul>
-
-                <#if user.email??>
-                <div class="dropdown text-end">
-                    <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle"
-                       id="dropdownUserLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="me-2">${user.name}</span>
-                        <img src="/static/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
-                    </a>
-                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUserLink">
-                        <#if user.isAdmin()>
-                            <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
-                        </#if>
-                        <li><a class="dropdown-item" href="/my/tasks">My tasks</a></li>
-                        <li><a class="dropdown-item" href="/settings">Settings</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form action="/logout" method="post" class="mx-2">
-                                <input type="hidden" class="form-control" name="_csrf" value="${_csrf.token}"/>
-                                <button type="submit" class="btn btn-danger my-2 my-sm-0" style="width: 100%;">Выйти</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <#else>
-                    <button class="btn btn-outline-primary me-2" type="button"
-                            onclick="window.location.href = '/login'">Войти</button>
+                <#if user?has_content>
+                    <#if user.email??>
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle"
+                           id="dropdownUserLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="me-2">${user.name}</span>
+                            <img src="/static/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUserLink">
+                            <#if user.isAdmin()>
+                                <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
+                            </#if>
+                            <li><a class="dropdown-item" href="/my/tasks">My tasks</a></li>
+                            <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="/logout" method="post" class="mx-2">
+                                    <input type="hidden" class="form-control" name="_csrf" value="${_csrf.token}"/>
+                                    <button type="submit" class="btn btn-danger my-2 my-sm-0" style="width: 100%;">Выйти</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <#else>
+                        <button class="btn btn-outline-primary me-2" type="button"
+                                onclick="window.location.href = '/login'">Войти</button>
+                    </#if>
                 </#if>
             </div>
         </div>

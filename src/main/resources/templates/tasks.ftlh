@@ -38,7 +38,7 @@
                                     <div class="card text-black bg-light my-9 task">
                                         <#if task.previewImageId != -1>
                                             <img src="/images/${task.previewImageId}"
-                                                 class="card-img-top">
+                                                 class="card-img-top" alt="previewImageId">
                                         </#if>
                                         <div class="d-flex align-items-center">
                                             <div class="rounded-0 ms-2" style="min-width: 25px; text-align: center">

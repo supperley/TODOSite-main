@@ -3,6 +3,7 @@ package com.example.TODO_Site.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "tasks")
 @Data
+@Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
 public class Task {
@@ -50,5 +52,6 @@ public class Task {
     public void addImageToTask(Image image){
         image.setTask(this); // устанавливаем текущее задание
         images.add(image);
+        log.info("Image added");
     }
 }
