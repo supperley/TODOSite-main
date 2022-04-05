@@ -5,6 +5,7 @@ import com.example.TODO_Site.models.Task;
 import com.example.TODO_Site.models.User;
 import com.example.TODO_Site.repositories.TaskRepository;
 import com.example.TODO_Site.repositories.UserRepository;
+import com.example.TODO_Site.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.Objects;
 public class TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     public List<Task> listTasks(User user, String title, String priority) {
         //List<Task> result = taskRepository.findAll();
@@ -59,7 +61,7 @@ public class TaskService {
     }
 
     public void saveTask(Principal principal, Task task, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
-        task.setUser(getUserByPrincipal(principal));
+        task.setUser(userService.getUserByPrincipal(principal));
         Image image1;
         Image image2;
         Image image3;
@@ -84,11 +86,6 @@ public class TaskService {
         else
             productFromDb.setPreviewImageId((long) -1);
         taskRepository.save(task);
-    }
-
-    public User getUserByPrincipal(Principal principal) {
-        if (principal == null) return new User();
-        return userRepository.findByEmail(principal.getName());
     }
 
     private Image toImageEntity(MultipartFile file) throws IOException {

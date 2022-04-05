@@ -1,9 +1,10 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>500 page</title>
-</head>
-<body>
-<span>500 page!</span>
-</body>
-</html>
+<#import "../blocks/template.ftlh" as t>
+<@t.template>
+    <main class="container">
+        <div class="bg-light p-5 rounded">
+            <h1>Ошибка 500</h1>
+            <p class="lead">При обработке запроса произошла ошибка на сервере или привышен лимит времени обработки.</p>
+            <a class="btn btn-lg btn-primary" href="/" role="button">Вернуться на главную »</a>
+        </div>
+    </main>
+</@t.template>

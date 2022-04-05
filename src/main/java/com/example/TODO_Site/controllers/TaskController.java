@@ -3,6 +3,7 @@ package com.example.TODO_Site.controllers;
 import com.example.TODO_Site.models.Task;
 import com.example.TODO_Site.models.User;
 import com.example.TODO_Site.services.TaskService;
+import com.example.TODO_Site.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,13 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class TaskController {
     private final TaskService taskService;
+    private final UserService userService;
 
     @GetMapping("/")
     public String index(@RequestParam(name = "priority", required = false) String priority,
                         @RequestParam(name = "title", required = false) String title,
                         Principal principal, Model model) {
-        User user = taskService.getUserByPrincipal(principal);
+        User user = userService.getUserByPrincipal(principal);
         model.addAttribute("tasks", taskService.listTasks(user, title, priority));
         model.addAttribute("user", user);
         model.addAttribute("title", title);
@@ -42,11 +44,11 @@ public class TaskController {
 
     @GetMapping("/task/{id}")
     public String tasksInfo(@PathVariable Long id, Model model, Principal principal) {
-        User user = taskService.getUserByPrincipal(principal);
+        User user = userService.getUserByPrincipal(principal);
         Task task = taskService.getTaskById(id);
         if (task.getUser() != user)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
-        model.addAttribute("user", taskService.getUserByPrincipal(principal));
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Forbidden");
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("task", task);
         model.addAttribute("images", task.getImages());
         model.addAttribute("authorTask", task.getUser());
@@ -75,7 +77,7 @@ public class TaskController {
 
     @GetMapping("/my/tasks")
     public String userTasks(Principal principal, Model model) {
-        User user = taskService.getUserByPrincipal(principal);
+        User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
         model.addAttribute("tasks", user.getProducts());
         return "mytasks";

@@ -30,9 +30,9 @@ public class Image {
 
     @Lob
     //@Column(columnDefinition="BLOB")
-    private byte[] bytes;//поле хранится в бд с типом long blob
-    @ManyToOne (cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    private Task product;
+    private byte[] bytes; // поле хранится в бд с типом long blob
+    @ManyToOne (cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "task_id")

@@ -48,3 +48,16 @@
     object-fit: contain;
     object-position: center;
 }
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: relative;
+    }
+    .taskinfo-nav {
+        justify-content: center!important;
+    }
+}
+
+.header-navbar {
+    display: flex;
+}

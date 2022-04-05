@@ -53,4 +53,11 @@
     .dropdown-menu {
         position: relative;
     }
+    .taskinfo-nav {
+        justify-content: center!important;
+    }
+}
+
+.header-navbar {
+    display: flex;
 }

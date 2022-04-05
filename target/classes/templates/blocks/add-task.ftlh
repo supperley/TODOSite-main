@@ -1,5 +1,5 @@
 <#macro add_task>
-    <a class="btn btn-dark my-2" style="text-align: center; width: 100%"
+    <a class="btn btn-secondary my-2" style="text-align: center; width: 100%"
        data-bs-toggle="collapse" href="#collapseExample" role="button"
        aria-expanded="true" aria-controls="collapseExample">
         Добавить новую задачу

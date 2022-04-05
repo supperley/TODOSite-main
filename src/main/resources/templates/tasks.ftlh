@@ -51,21 +51,19 @@
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">${task.title}</h5>
-                                                <h6 class="card-title">
                                                     <#switch task.priority>
                                                         <#case 3>
-                                                            High
+                                                            <h6 class="card-title text-danger">Высокий</h6>
                                                             <#break>
                                                         <#case 2>
-                                                            Medium
+                                                            <h6 class="card-title text-warning">Средний</h6>
                                                             <#break>
                                                         <#case 1>
-                                                            Low
+                                                            <h6 class="card-title text-success">Низкий</h6>
                                                             <#break>
                                                         <#default>
-                                                            None
+                                                        <h6 class="card-title">Нет</h6>
                                                     </#switch>
-                                                </h6>
                                             </div>
                                         </div>
                                     </div>

@@ -30,7 +30,7 @@
             </div>
         </#if>
 
-        <h6 class="border-bottom pb-2 mb-0">${task.title}</h6>
+        <h6 class="border-bottom mt-2 pb-2 mb-0">${task.title}</h6>
 
         <#if task.tag?has_content>
         <div class="d-flex text-muted pt-3 border-bottom">
@@ -40,7 +40,7 @@
             </svg>
 
             <p class="pb-3 mb-0 small lh-sm">
-                <strong class="d-block text-gray-dark">Tags</strong>
+                <strong class="d-block text-gray-dark">Теги</strong>
                 ${task.tag}
             </p>
         </div>
@@ -53,20 +53,20 @@
             </svg>
 
             <p class="pb-3 mb-0 small lh-sm">
-                <strong class="d-block text-gray-dark">Priority</strong>
+                <strong class="d-block text-gray-dark">Приоритет</strong>
                 <#switch task.priority>
-                    <#case 3>
-                        High
-                        <#break>
-                    <#case 2>
-                        Medium
-                        <#break>
-                    <#case 1>
-                        Low
-                        <#break>
-                    <#default>
-                        None
-                </#switch>
+                <#case 3>
+                    <span class="text-danger">Высокий</span>
+                    <#break>
+                <#case 2>
+                    <span class="text-warning">Средний</span>
+                    <#break>
+                <#case 1>
+                    <span class="text-success">Низкий</span>
+                    <#break>
+                <#default>
+                    <span>Нет</span>
+            </#switch>
             </p>
         </div>
 
@@ -76,16 +76,16 @@
                 <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
             </svg>
             <p class="pb-3 mb-0 small lh-sm">
-                <strong class="d-block text-gray-dark">Description</strong>
+                <strong class="d-block text-gray-dark">Описание</strong>
                 ${task.description}
             </p>
         </div>
         </#if>
 
-        <div class="d-flex flex-wrap justify-content-between align-items-center">
-            <small class="d-block">
-                <a href="/">Go back</a>
-            </small>
+        <div class="d-flex flex-wrap justify-content-between align-items-center taskinfo-nav">
+            <div class="d-block m-3">
+                <a href="/">Вернуться</a>
+            </div>
             <div class="d-flex flex-wrap">
                 <form action="/task/edit/${task.id}" method="post">
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>

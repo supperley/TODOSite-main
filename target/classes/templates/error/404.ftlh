@@ -1,12 +1,3 @@
-<#--<html>-->
-<#--<head>-->
-<#--    <meta charset="utf-8">-->
-<#--    <title>404 ftl page</title>-->
-<#--</head>-->
-<#--<body>-->
-<#--<span>404 ftl page!</span>-->
-<#--</body>-->
-<#--</html>-->
 <#import "../blocks/template.ftlh" as t>
 <@t.template>
     <main class="container">

@@ -7,7 +7,7 @@
     <@t2.add_task></@t2.add_task>
 
     <div class="col-12" id="masonry" data-masonry='{"percentPosition": true }'>
-        <div class="row w-100">
+        <div class="row">
             <#list tasks as task >
                 <div class="col-sm-6 col-lg-4 mb-4">
                     <a href="/task/${task.id}" class="task-link">

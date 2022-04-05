@@ -38,7 +38,6 @@ public class UserController {
         return "registration";
     }
 
-
     @PostMapping("/registration")
     public String createUser(User user, Model model) {
         if (!userService.createUser(user)) {
@@ -53,7 +52,6 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("userByPrincipal", userService.getUserByPrincipal(principal));
         //model.addAttribute("products", user.getProducts());
-
 
          model.addAttribute("tasks", taskService.getTaskByUser(user));
 

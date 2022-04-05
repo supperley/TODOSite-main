@@ -19,7 +19,7 @@
 
         <link rel="stylesheet" href="/static/css/style.css">
 
-        <title>TODO Site</title>
+        <title>Список дел</title>
     </head>
     <body>
 <#--    <div class="theme">-->
@@ -29,9 +29,9 @@
 
     <header class="navbar navbar-expand-lg navbar-light bg-light p-3 mb-3 border-bottom">
         <div class="container">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+            <a href="/" class="d-flex align-items-center mb-lg-0 text-dark text-decoration-none">
                 <img class="bi me-2" width="40" height="32" src="../../static/images/logo.svg" alt="logo">
-                <span class="navbar-brand">TODO Site</span>
+                <span class="navbar-brand">Список дел</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -40,11 +40,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="header-navbar flex-wrap justify-content-center navbar-collapse collapse" id="navbarSupportedContent">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+                    <li><a href="#" class="nav-link px-2 link-secondary">Домой</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">Функции</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark">О нас</a></li>
                 </ul>
                 <#if user?has_content>
                     <#if user.email??>
@@ -56,10 +56,10 @@
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUserLink">
                             <#if user.isAdmin()>
-                                <li><a class="dropdown-item" href="/admin">Admin panel</a></li>
+                                <li><a class="dropdown-item" href="/admin">Панель администратора</a></li>
                             </#if>
-                            <li><a class="dropdown-item" href="/my/tasks">My tasks</a></li>
-                            <li><a class="dropdown-item" href="/settings">Settings</a></li>
+                            <li><a class="dropdown-item" href="/my/tasks">Мои задачи</a></li>
+                            <li><a class="dropdown-item" href="/settings">Настройки</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form action="/logout" method="post" class="mx-2">
