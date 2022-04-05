@@ -4,7 +4,7 @@
     <h1>Список задач</h1><hr>
     <@t2.add_task></@t2.add_task>
     <div class="mt-3 row">
-        <aside class="col-3">
+        <aside class="col-12 col-md-3 mb-4">
             <form method="get" action="/">
                 <div>
                     <label for="priority" class="col-form-label">Приоритет</label>
@@ -31,7 +31,7 @@
             </form>
         </aside>
         <#if tasks?has_content>
-            <div class="col-9" id="masonry" data-masonry='{"percentPosition": true }'>
+            <div class="col-12 col-md-9" id="masonry" data-masonry='{"percentPosition": true }'>
                 <div class="row w-100">
                     <#list tasks as task>
                         <#if !task.isChecked>

@@ -48,3 +48,9 @@
     object-fit: contain;
     object-position: center;
 }
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: relative;
+    }
+}

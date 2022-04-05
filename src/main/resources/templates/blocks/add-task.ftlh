@@ -7,19 +7,19 @@
     <div class="collapse mb-3" id="collapseExample">
         <form action="/task/create" method="post" enctype="multipart/form-data">
             <div class="row justify-content-between">
-                <div class="mb-3 col-4">
-                    <label for="reviewName" class="col-form-label">Название задачи</label>
+                <div class="mb-3 col-12 col-md-4">
+                    <label for="taskName" class="col-form-label">Название задачи</label>
                     <input type="text" required class="form-control"
-                           id="reviewName" name="title">
+                           id="taskName" name="title">
                 </div>
 
-                <div class="mb-3 col-4">
-                    <label for="reviewTag" class="col-form-label">Тэги задачи</label>
-                    <input type="tag" required class="form-control"
-                           id="reviewЕфп" name="tag">
+                <div class="mb-3 col-12 col-md-4">
+                    <label for="taskTag" class="col-form-label">Тэги задачи</label>
+                    <input type="tag" class="form-control"
+                           id="taskTag" name="tag">
                 </div>
 
-                <div class="mb-3 col-4">
+                <div class="mb-3 col-12 col-md-4">
                     <label for="priority" class="col-form-label">Приоритет</label>
                     <select id="priority" required name="priority" class="form-select">
                         <option value="">Приоритет не выбран</option>
@@ -32,7 +32,7 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="col-form-label">Описание задачи</label>
-                <textarea required class="form-control" id="description" name="description"></textarea>
+                <textarea class="form-control" id="description" name="description"></textarea>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="file1">Первая фотография</label>
