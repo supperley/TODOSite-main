@@ -76,7 +76,7 @@ public class TaskService {
             image3 = toImageEntity(file3);
             task.addImageToTask(image3);
         }
-        log.info("Saving new Product. Title: {}; Author email: {}", task, task.getUser().getEmail());
+        log.info("Saving new Product. Title: {}; Author email: {}", task.getTitle(), task.getUser().getEmail());
         Task productFromDb = taskRepository.save(task);
         if (file1.getSize() != 0) {
             productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());

@@ -1,7 +1,9 @@
 <#import "blocks/template.ftlh" as t>
+<#import "blocks/add-task.ftlh" as t2>
 <@t.template user>
     <h1>Список задач</h1><hr>
-    <div class="row">
+    <@t2.add_task></@t2.add_task>
+    <div class="mt-3 row">
         <aside class="col-3">
             <form method="get" action="/">
                 <div>

@@ -3,30 +3,34 @@
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <#if images?has_content>
             <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <#list images as image>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide"></button>
-                    </#list>
-                </div>
+                <#if images?size gt 1>
+                    <div class="carousel-indicators">
+                        <#list images as image>
+                            <button class="${(image?counter == 1)?then('active', '')}" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${(image?counter == 1)?then(0, (image?counter - 1))}" aria-current="true" aria-label="Slide"></button>
+                        </#list>
+                    </div>
+                </#if>
                 <div class="carousel-inner">
                     <#list images as image>
-                    <div class="carousel-item <#if image.previewImage>active</#if>">
-                        <img src="/images/${image.id}" class="d-block w-100" alt="...">
-                    </div>
+                        <div class="carousel-item <#if image.previewImage>active</#if>">
+                            <img src="/images/${image.id}" class="d-block w-100" alt="...">
+                        </div>
                     </#list>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <#if images?size gt 1>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </#if>
             </div>
         </#if>
 
-        <h6 class="border-bottom pb-2 mb-0">${tasks.title}</h6>
+        <h6 class="border-bottom pb-2 mb-0">${task.title}</h6>
         <div class="d-flex text-muted pt-3 border-bottom">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-tags bd-placeholder-img flex-shrink-0 ms-1 me-2 rounded" viewBox="0 0 16 16">
                 <path d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z"/>
@@ -35,7 +39,7 @@
 
             <p class="pb-3 mb-0 small lh-sm">
                 <strong class="d-block text-gray-dark">Tags</strong>
-                ${tasks.tag}
+                ${task.tag}
             </p>
         </div>
         <div class="d-flex text-muted pt-3 border-bottom">
@@ -46,7 +50,7 @@
 
             <p class="pb-3 mb-0 small lh-sm">
                 <strong class="d-block text-gray-dark">Priority</strong>
-                <#switch tasks.priority>
+                <#switch task.priority>
                     <#case 3>
                         High
                         <#break>
@@ -67,11 +71,27 @@
             </svg>
             <p class="pb-3 mb-0 small lh-sm">
                 <strong class="d-block text-gray-dark">Description</strong>
-                ${tasks.description}
+                ${task.description}
             </p>
         </div>
-        <small class="d-block mt-3">
-            <a href="/">Go back</a>
-        </small>
+        <div class="d-flex justify-content-between align-items-center">
+            <small class="d-block">
+                <a href="/">Go back</a>
+            </small>
+            <div class="d-flex">
+                <form action="/task/edit/${task.id}" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-outline-primary m-3">
+                        Редактировать
+                    </button>
+                </form>
+                <form action="/task/delete/${task.id}" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-danger m-3">
+                        Удалить
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </@t.template>

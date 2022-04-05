@@ -47,9 +47,8 @@ public class TaskController {
         if (task.getUser() != user)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "entity not found");
         model.addAttribute("user", taskService.getUserByPrincipal(principal));
-        model.addAttribute("tasks", task);
+        model.addAttribute("task", task);
         model.addAttribute("images", task.getImages());
-        log.info("Task images: {}", task.getImages());
         model.addAttribute("authorTask", task.getUser());
         return "task-info";
     }
@@ -59,7 +58,7 @@ public class TaskController {
                              @RequestParam("file3") MultipartFile file3, Task task, Principal principal) throws IOException {
         taskService.saveTask(
                 principal, task, file1, file2, file3);
-        return "redirect:/my/tasks";
+        return "redirect:/";
     }
 
     @PostMapping("/task/delete/{id}")
