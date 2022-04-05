@@ -26,10 +26,10 @@
                     <label for="searchGroup" class="col-form-label">Приоритет</label>
                     <select id="searchGroup" required name="group" class="form-select">
                         <option value="">Приоритет не выбран</option>
-                        <option value="High">Высокий</option>
-                        <option value="Medium">Средний</option>
-                        <option value="Low">Низкий</option>
-                        <option value="None">Нет</option>
+                        <option value="3">Высокий</option>
+                        <option value="2">Средний</option>
+                        <option value="1">Низкий</option>
+                        <option value="0">Нет</option>
                     </select>
                 </div>
             </div>
@@ -55,7 +55,7 @@
         </form>
     </div>
     <div class="col-12" id="masonry" data-masonry='{"percentPosition": true }'>
-        <div class="row">
+        <div class="row w-100">
             <#list tasks as task >
                 <div class="col-sm-6 col-lg-4 mb-4">
                     <a href="/task/${task.id}" class="task-link">

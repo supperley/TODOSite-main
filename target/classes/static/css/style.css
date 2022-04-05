@@ -33,3 +33,18 @@
     padding: 15px;
     margin: auto;
 }
+
+.carousel {
+    height: 40vh;
+}
+
+.carousel-inner,
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-item img {
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
