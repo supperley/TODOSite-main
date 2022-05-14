@@ -2,6 +2,10 @@
     transition: 0.5s all;
 }
 
+a {
+    text-decoration: none;
+}
+
 .task:hover {
     transform: scale(1.02);
 }
@@ -57,6 +61,9 @@
         justify-content: center!important;
     }
     .profile-nav {
+        justify-content: center!important;
+    }
+    .settings-switch {
         justify-content: center!important;
     }
 }

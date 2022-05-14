@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="mb-3 col-12 col-md-4">
-                    <label for="taskTag" class="col-form-label">Тэги задачи</label>
+                    <label for="taskTag" class="col-form-label">Теги задачи</label>
                     <input type="tag" class="form-control"
                            id="taskTag" name="tag">
                 </div>

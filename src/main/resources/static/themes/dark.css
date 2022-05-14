@@ -18,3 +18,7 @@ body, .bg-body, .form-control, .border, .bg-light, .navbar-brand,
 .link-secondary:hover ,.link-dark:hover, .link-dark:focus {
     color: #fff !important;
 }
+
+.dropdown-item:active {
+    background-color: #464745 !important;
+}

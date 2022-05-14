@@ -25,6 +25,7 @@ public class TaskService {
     private final UserRepository userRepository;
     private final ImageRepository imageRepository;
     private final UserService userService;
+    private final ImageService imageService;
 
     public List<Task> listTasks(User user, String title, String priority) {
         //List<Task> result = taskRepository.findAll();
@@ -69,18 +70,18 @@ public class TaskService {
         Image image2;
         Image image3;
         if (file1.getSize() != 0) {
-            image1 = toImageEntity(file1);
+            image1 = imageService.toImageEntity(file1);
             image1.setPreviewImage(true);
             image1.setUser(user);
             task.addImageToTask(image1);
         }
         if (file2.getSize() != 0) {
-            image2 = toImageEntity(file2);
+            image2 = imageService.toImageEntity(file2);
             image2.setUser(user);
             task.addImageToTask(image2);
         }
         if (file3.getSize() != 0) {
-            image3 = toImageEntity(file3);
+            image3 = imageService.toImageEntity(file3);
             image3.setUser(user);
             task.addImageToTask(image3);
         }
@@ -113,7 +114,7 @@ public class TaskService {
         List<Image> new_images = new ArrayList<>();
         log.info("ImagesSizeOld: {}", old_images.size());
         if (file1.getSize() != 0) {
-            image1 = toImageEntity(file1);
+            image1 = imageService.toImageEntity(file1);
             image1.setPreviewImage(true);
             image1.setTask(task);
             image1.setUser(user);
@@ -124,7 +125,7 @@ public class TaskService {
             new_images.add(image1);
         }
         if (file2.getSize() != 0) {
-            image2 = toImageEntity(file2);
+            image2 = imageService.toImageEntity(file2);
             image2.setTask(task);
             image2.setUser(user);
             if (old_images.size() > 1) {
@@ -133,7 +134,7 @@ public class TaskService {
             new_images.add(image2);
         }
         if (file3.getSize() != 0) {
-            image3 = toImageEntity(file3);
+            image3 = imageService.toImageEntity(file3);
             image3.setTask(task);
             image3.setUser(user);
             if (old_images.size() > 2) {
@@ -149,16 +150,6 @@ public class TaskService {
         }
         log.info("ImagesSizeNew: {}", task.getImages().size());
         taskRepository.save(task);
-    }
-
-    private Image toImageEntity(MultipartFile file) throws IOException {
-        Image image = new Image();
-        image.setName(file.getName());
-        image.setOriginalFileName(file.getOriginalFilename());
-        image.setContentType(file.getContentType());
-        image.setSize(file.getSize());
-        image.setBytes(file.getBytes());
-        return image;
     }
 
     public void deleteTask(Long id){

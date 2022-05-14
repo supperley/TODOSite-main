@@ -24,7 +24,11 @@
 
         <link rel="stylesheet" href="/static/${themeStyleSheet}">
 
-        <title>Список дел</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+                crossorigin="anonymous"></script>
+
+        <title>Планировщик задач</title>
     </head>
     <body>
 <#--    <div class="theme">-->
@@ -36,7 +40,7 @@
         <div class="container">
             <a href="/" class="d-flex align-items-center mb-lg-0 text-dark text-decoration-none">
                 <img class="bi me-2" width="40" height="32" src="../../static/images/logo.svg" alt="logo">
-                <span class="navbar-brand">Список дел</span>
+                <span class="navbar-brand">Планировщик задач</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -47,9 +51,9 @@
 
             <div class="header-navbar flex-wrap justify-content-center navbar-collapse collapse" id="navbarSupportedContent">
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 link-secondary">Домой</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">Функции</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">О нас</a></li>
+                    <li><a href="/" class="nav-link px-2 link-secondary">Домой</a></li>
+                    <li><a href="/functions" class="nav-link px-2 link-dark">Функции</a></li>
+                    <li><a href="/about" class="nav-link px-2 link-dark">О нас</a></li>
                 </ul>
                 <#if user?has_content>
                     <#if user.email??>
@@ -57,7 +61,11 @@
                         <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle"
                            id="dropdownUserLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="me-2">${user.name}</span>
-                            <img src="/static/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                            <#if user.avatar?has_content>
+                                <img src="/images/${user.avatar.id}" alt="avatar" width="32" height="32" class="rounded-circle">
+                            <#else>
+                                <img src="/static/images/avatar.png" alt="avatar" width="32" height="32" class="rounded-circle">
+                            </#if>
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUserLink">
                             <li><a class="dropdown-item" href="/profile">Профиль</a></li>
@@ -90,9 +98,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-			integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
-			crossorigin="anonymous"></script>
 
     <script>
         setTimeout(function(){
@@ -101,8 +106,6 @@
             document.body.appendChild(masonryScript);
         }, 1000);
     </script>
-
-    <script src="/static/js/main.js"></script>
     </body>
     </html>
 </#macro>

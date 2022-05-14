@@ -2,9 +2,15 @@
 <@t.template user>
     <div class="my-3 p-3 bg-body rounded shadow-sm">
         <div class="text-center">
-        <h1>Личный кабинет</h1>
-            <hr>
-            <img src="/static/images/avatar.png" style="border:2px solid black; border-radius: 20px" height="120">
+            <h1>Личный кабинет</h1>
+                <hr>
+            <#if user.avatar?has_content>
+                <img src="/images/${user.avatar.id}" alt="avatar"
+                     style="border-radius: 20px" height="120">
+            <#else>
+                <img src="/static/images/avatar.png" alt="avatar"
+                     style="border:2px solid black; border-radius: 20px" height="120">
+            </#if>
         </div>
         <div class="d-flex text-muted pt-3 border-bottom">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-tags bd-placeholder-img flex-shrink-0 ms-1 me-2 rounded" viewBox="0 0 16 16">
