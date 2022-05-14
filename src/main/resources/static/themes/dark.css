@@ -1,3 +1,20 @@
-body {
-    background-color: #000;
+body, .bg-body, .form-control, .border, .bg-light, .navbar-brand,
+.link-secondary, .link-dark, .text-muted, .form-select,
+.dropdown-menu, .dropdown-item {
+    color: #d1cdc7 !important;
+    background-color: #181a1b !important;
+    border-color: #464745 !important;
+}
+
+.btn-dark, .dropdown-divider {
+    background-color: #464745 !important;
+    border-color: #464745 !important;
+}
+
+.border-bottom {
+    border-bottom-color: #464745 !important;
+}
+
+.link-secondary:hover ,.link-dark:hover, .link-dark:focus {
+    color: #fff !important;
 }

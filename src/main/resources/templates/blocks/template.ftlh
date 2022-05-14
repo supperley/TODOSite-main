@@ -24,7 +24,7 @@
 
         <link rel="stylesheet" href="/static/${themeStyleSheet}">
 
-        <title>Список дел</title>
+        <title>Планировщик задач</title>
     </head>
     <body>
 <#--    <div class="theme">-->
@@ -36,7 +36,7 @@
         <div class="container">
             <a href="/" class="d-flex align-items-center mb-lg-0 text-dark text-decoration-none">
                 <img class="bi me-2" width="40" height="32" src="../../static/images/logo.svg" alt="logo">
-                <span class="navbar-brand">Список дел</span>
+                <span class="navbar-brand">Планировщик задач</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
