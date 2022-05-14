@@ -32,6 +32,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 
+//    TODO CascadeType
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
     mappedBy = "user")
     private List<Task> tasks = new ArrayList<>();

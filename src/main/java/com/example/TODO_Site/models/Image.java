@@ -31,7 +31,8 @@ public class Image {
     @Lob
     //@Column(columnDefinition="BLOB")
     private byte[] bytes; // поле хранится в бд с типом long blob
-    @ManyToOne (cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
@@ -44,6 +45,14 @@ public class Image {
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
 

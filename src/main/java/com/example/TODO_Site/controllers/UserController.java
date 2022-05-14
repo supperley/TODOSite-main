@@ -57,4 +57,11 @@ public class UserController {
 
         return "user-info";
     }
+
+    @GetMapping("/settings")
+    public String settings(Principal principal, Model model) {
+        User user = userService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        return "settings";
+    }
 }

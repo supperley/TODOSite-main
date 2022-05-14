@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring />
 <#macro template user="">
     <!doctype html>
     <html lang="ru">
@@ -12,12 +13,16 @@
               crossorigin="anonymous">
 
         <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
               rel="stylesheet"
-              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
               crossorigin="anonymous">
 
         <link rel="stylesheet" href="/static/css/style.css">
+
+        <#assign themeStyleSheet><@spring.theme 'styleSheet'/></#assign>
+
+        <link rel="stylesheet" href="/static/${themeStyleSheet}">
 
         <title>Список дел</title>
     </head>
@@ -55,6 +60,7 @@
                             <img src="/static/images/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUserLink">
+                            <li><a class="dropdown-item" href="/profile">Профиль</a></li>
                             <#if user.isAdmin()>
                                 <li><a class="dropdown-item" href="/admin">Панель администратора</a></li>
                             </#if>

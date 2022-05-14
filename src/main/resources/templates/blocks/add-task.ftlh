@@ -39,11 +39,11 @@
                 <input class="form-control" type="file" name="file1" id="file1">
             </div>
             <div class="mb-3">
-                <label class="form-label" for="file1">Вторая фотография</label>
+                <label class="form-label" for="file2">Вторая фотография</label>
                 <input class="form-control" type="file" name="file2" id="file2">
             </div>
             <div class="mb-3">
-                <label class="form-label" for="file1">Третья фотография</label>
+                <label class="form-label" for="file3">Третья фотография</label>
                 <input class="form-control" type="file" name="file3" id="file3">
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>

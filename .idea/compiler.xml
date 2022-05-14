@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Recommendation_Site" />
+        <module name="TODO_Site" />
         <module name="TODOSite-main" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Recommendation_Site" options="-parameters" />
       <module name="TODOSite-main" options="-parameters" />
+      <module name="TODO_Site" options="-parameters" />
     </option>
   </component>
 </project>

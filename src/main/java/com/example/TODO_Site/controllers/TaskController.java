@@ -48,8 +48,8 @@ public class TaskController {
         Task task = taskService.getTaskById(id);
         if (task.getUser() != user)
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Forbidden");
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("task", task);
+        model.addAttribute("user", user);
         model.addAttribute("images", task.getImages());
         model.addAttribute("authorTask", task.getUser());
         return "task-info";
@@ -65,6 +65,7 @@ public class TaskController {
 
     @PostMapping("/task/delete/{id}")
     public String deleteTask(@PathVariable Long id){
+        taskService.deleteImagesByTaskId(id);
         taskService.deleteTask(id);
         return "redirect:/";
     }
@@ -72,6 +73,27 @@ public class TaskController {
     @PostMapping("/task/check/{id}")
     public String checkTask(@PathVariable Long id){
         taskService.checkTask(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/task/{id}/edit")
+    public String editTask(@PathVariable Long id, Model model, Principal principal) {
+        User user = userService.getUserByPrincipal(principal);
+        Task task = taskService.getTaskById(id);
+        if (task.getUser() != user)
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Forbidden");
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("task", task);
+        model.addAttribute("images", task.getImages());
+        model.addAttribute("authorTask", task.getUser());
+        return "task-edit";
+    }
+
+    @PostMapping("/task/{id}/edit")
+    public String saveTask(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
+                             @RequestParam("file3") MultipartFile file3, Task task, Principal principal) throws IOException {
+        taskService.editTask(
+                principal, task, file1, file2, file3);
         return "redirect:/";
     }
 

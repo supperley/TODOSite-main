@@ -82,17 +82,24 @@
         </div>
         </#if>
 
+        <div class="d-flex text-muted pt-3 border-bottom">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clock bd-placeholder-img flex-shrink-0 ms-1 me-2 rounded" viewBox="0 0 16 16">
+                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm">
+                <strong class="d-block text-gray-dark">Дата создания</strong>
+                ${task.dateOfCreated}
+            </p>
+        </div>
+
         <div class="d-flex flex-wrap justify-content-between align-items-center taskinfo-nav">
             <div class="d-block m-3">
                 <a href="/">Вернуться</a>
             </div>
             <div class="d-flex flex-wrap">
-                <form action="/task/edit/${task.id}" method="post">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                    <button type="submit" class="btn btn-outline-primary m-3">
-                        Редактировать
-                    </button>
-                </form>
+                <a class="btn btn-outline-primary m-3" href="/task/${task.id}/edit" role="button">Редактировать</a>
+
                 <form action="/task/delete/${task.id}" method="post">
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                     <button type="submit" class="btn btn-danger m-3">

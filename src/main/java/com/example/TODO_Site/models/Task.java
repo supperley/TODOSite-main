@@ -49,7 +49,7 @@ public class Task {
         isChecked = false;
     }
 
-    public void addImageToTask(Image image){
+    public void addImageToTask(Image image) {
         image.setTask(this); // устанавливаем текущее задание
         images.add(image);
         log.info("Image added");
