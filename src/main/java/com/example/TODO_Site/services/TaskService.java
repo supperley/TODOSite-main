@@ -3,9 +3,7 @@ package com.example.TODO_Site.services;
 import com.example.TODO_Site.models.Image;
 import com.example.TODO_Site.models.Task;
 import com.example.TODO_Site.models.User;
-import com.example.TODO_Site.repositories.ImageRepository;
 import com.example.TODO_Site.repositories.TaskRepository;
-import com.example.TODO_Site.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,8 +20,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class TaskService {
     private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
-    private final ImageRepository imageRepository;
     private final UserService userService;
     private final ImageService imageService;
 
@@ -87,15 +83,19 @@ public class TaskService {
         }
         log.info("Saving new Product. Title: {}; Author email: {}", task.getTitle(), task.getUser().getEmail());
         Task productFromDb = taskRepository.save(task);
-        if (file1.getSize() != 0) {
+        if (productFromDb.getImages().size() > 0) {
             productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
+            productFromDb.getImages().get(0).setPreviewImage(true);
         }
         else
-            productFromDb.setPreviewImageId((long) -1);
+            productFromDb.setPreviewImageId(-1L);
         taskRepository.save(task);
     }
 
-    public void editTask(Principal principal, Task new_task, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
+    public void editTask(Principal principal, Task new_task,
+                         MultipartFile file1, MultipartFile file2,
+                         MultipartFile file3, String delete_first,
+                         String delete_second, String delete_third) throws IOException {
         Task task = getTaskById(new_task.getId());
         User user = userService.getUserByPrincipal(principal);
         task.setUser(user);
@@ -108,9 +108,34 @@ public class TaskService {
         Image image3;
         List<Image> old_images = task.getImages();
         task.setImages(null);
-//        imageRepository.delete(old_images.get(0));
-//        imageRepository.delete(old_images.get(1));
-//        imageRepository.delete(old_images.get(2));
+
+        if (Objects.equals(delete_first, "on")) {
+            log.info("Deleting first");
+            task.setPreviewImageId(-1L);
+            if (old_images.size() > 0) {
+                imageService.deleteImage(old_images.get(0).getId());
+                old_images.remove(0);
+            }
+            if (old_images.size() > 0) {
+                task.setPreviewImageId(old_images.get(0).getId());
+                old_images.get(0).setPreviewImage(true);
+            }
+        }
+        if (Objects.equals(delete_second, "on")) {
+            log.info("Deleting second");
+            if (old_images.size() > 1) {
+                imageService.deleteImage(old_images.get(1).getId());
+                old_images.remove(1);
+            }
+        }
+        if (Objects.equals(delete_third, "on")) {
+            log.info("Deleting third");
+            if (old_images.size() > 2) {
+                imageService.deleteImage(old_images.get(2).getId());
+                old_images.remove(2);
+            }
+        }
+
         List<Image> new_images = new ArrayList<>();
         log.info("ImagesSizeOld: {}", old_images.size());
         if (file1.getSize() != 0) {
@@ -120,7 +145,7 @@ public class TaskService {
             image1.setUser(user);
             if (old_images.size() > 0) {
                 log.info("Id: {}", old_images.get(0).getId());
-                deleteImage(old_images.get(0).getId());
+                imageService.deleteImage(old_images.get(0).getId());
             }
             new_images.add(image1);
         }
@@ -129,7 +154,7 @@ public class TaskService {
             image2.setTask(task);
             image2.setUser(user);
             if (old_images.size() > 1) {
-                deleteImage(old_images.get(1).getId());
+                imageService.deleteImage(old_images.get(1).getId());
             }
             new_images.add(image2);
         }
@@ -138,15 +163,16 @@ public class TaskService {
             image3.setTask(task);
             image3.setUser(user);
             if (old_images.size() > 2) {
-                deleteImage(old_images.get(2).getId());
+                imageService.deleteImage(old_images.get(2).getId());
             }
             new_images.add(image3);
         }
         task.setImages(new_images);
         log.info("Editing Product. Title: {}; Author email: {}", task.getTitle(), task.getUser().getEmail());
         Task productFromDb = taskRepository.save(task);
-        if (file1.getSize() != 0) {
+        if (productFromDb.getImages().size() > 0) {
             productFromDb.setPreviewImageId(productFromDb.getImages().get(0).getId());
+            productFromDb.getImages().get(0).setPreviewImage(true);
         }
         log.info("ImagesSizeNew: {}", task.getImages().size());
         taskRepository.save(task);
@@ -155,16 +181,10 @@ public class TaskService {
     public void deleteTask(Long id){
         Task task = taskRepository.getById(id);
         User user = task.getUser();
-//        List<Task> tasks = user.getProducts();
-//        Log.info("{}", tasks.size());
         user.getProducts().remove(task);
         task.setUser(null);
         taskRepository.deleteById(id);
 
-    }
-
-    public void deleteImage(Long id) {
-        imageRepository.deleteById(id);
     }
 
     public void deleteImagesByTaskId(Long id) {
@@ -175,7 +195,7 @@ public class TaskService {
         for (Image x: images) {
             x.setTask(null);
             x.setUser(null);
-            deleteImage(x.getId());
+            imageService.deleteImage(x.getId());
         }
     }
 

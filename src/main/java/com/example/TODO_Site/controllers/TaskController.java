@@ -90,10 +90,14 @@ public class TaskController {
     }
 
     @PostMapping("/task/{id}/edit")
-    public String saveTask(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                             @RequestParam("file3") MultipartFile file3, Task task, Principal principal) throws IOException {
+    public String saveTask(Principal principal, Task task, @RequestParam(defaultValue = "null") String delete_first,
+                           @RequestParam(defaultValue = "null") String delete_second,
+                           @RequestParam(defaultValue = "null") String delete_third, @RequestParam("file1") MultipartFile file1,
+                           @RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3) throws IOException {
+        log.info("Posttt = {} {} {}", delete_first, delete_second, delete_third);
         taskService.editTask(
-                principal, task, file1, file2, file3);
+                principal, task, file1, file2, file3,
+                delete_first, delete_second, delete_third);
         return "redirect:/";
     }
 

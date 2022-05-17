@@ -105,12 +105,12 @@
                 </p>
                 <input class="form-control mb-2" type="file" name="file1" id="file1">
                 <div class="d-flex">
-                    <input class="form-check-input me-2" type="checkbox" value="">
+                    <input class="form-check-input me-2" type="checkbox" name="delete_first">
                     <div class="d-block text-gray-dark">Удалить первую фотографию</div>
                 </div>
             </div>
 
-            <div class="text-muted pt-3 border-bottom">
+            <div class="text-muted pt-3 pb-3 border-bottom">
                 <p class="mb-0 small lh-sm w-100">
                     <label class="form-label" for="file2">
                         <strong class="d-block text-gray-dark">Заменить вторую фотографию</strong>
@@ -118,20 +118,20 @@
                 </p>
                 <input class="form-control mb-2" type="file" name="file2" id="file2">
                 <div class="d-flex">
-                    <input class="form-check-input me-2" type="checkbox" value="">
+                    <input class="form-check-input me-2" type="checkbox" name="delete_second">
                     <div class="d-block text-gray-dark">Удалить вторую фотографию</div>
                 </div>
             </div>
 
-            <div class="text-muted pt-3 border-bottom">
+            <div class="text-muted pt-3 pb-3 border-bottom">
                 <p class="mb-0 small lh-sm w-100">
                     <label class="form-label" for="file3">
                         <strong class="d-block text-gray-dark">Заменить третью фотографию</strong>
                     </label>
                 </p>
-                <input class="form-control" type="file" name="file3" id="file3">
+                <input class="form-control mb-2" type="file" name="file3" id="file3">
                 <div class="d-flex">
-                    <input class="form-check-input me-2" type="checkbox" value="">
+                    <input class="form-check-input me-2" type="checkbox" name="delete_third">
                     <div class="d-block text-gray-dark">Удалить третью фотографию</div>
                 </div>
             </div>

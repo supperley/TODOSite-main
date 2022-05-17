@@ -1,7 +1,6 @@
 package com.example.TODO_Site.controllers;
 
 import com.example.TODO_Site.models.Image;
-import com.example.TODO_Site.models.Task;
 import com.example.TODO_Site.models.User;
 import com.example.TODO_Site.repositories.ImageRepository;
 import com.example.TODO_Site.services.UserService;

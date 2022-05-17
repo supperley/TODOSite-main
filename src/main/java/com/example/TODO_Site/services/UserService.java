@@ -4,7 +4,6 @@ import com.example.TODO_Site.models.Image;
 import com.example.TODO_Site.models.User;
 import com.example.TODO_Site.models.enums.Role;
 import com.example.TODO_Site.repositories.UserRepository;
-import com.example.TODO_Site.services.TaskService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -100,6 +99,11 @@ public class UserService {
         if (avatar.getSize() != 0) {
             image = imageService.toImageEntity(avatar);
             image.setUser(user);
+            if (user.getAvatar() != null) {
+                Long image_id = user.getAvatar().getId();
+                user.setAvatar(null);
+                imageService.deleteImage(image_id);
+            }
             user.setAvatar(image);
         }
         userRepository.save(user);

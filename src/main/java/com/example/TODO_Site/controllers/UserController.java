@@ -1,12 +1,10 @@
 package com.example.TODO_Site.controllers;
 
 import com.example.TODO_Site.models.User;
-import com.example.TODO_Site.repositories.UserRepository;
 import com.example.TODO_Site.services.TaskService;
 import com.example.TODO_Site.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,7 +70,7 @@ public class UserController {
     }
 
     @PostMapping("/saveSettings")
-    public String saveSettings(@RequestParam("file") MultipartFile file, Principal principal, User user_edited, Model model,
+    public String saveSettings(@RequestParam("file") MultipartFile file, Principal principal, User user_edited,
                                RedirectAttributes redirectAttrs) throws IOException {
         User user = userService.getUserByPrincipal(principal);
         int result = userService.editUser(user, user_edited, file);

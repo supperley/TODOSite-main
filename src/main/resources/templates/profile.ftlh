@@ -57,19 +57,17 @@
             </p>
         </div>
         <div class="d-flex flex-wrap justify-content-between align-items-center profile-nav">
-            <div class="d-flex flex-wrap">
-                <div class="px-2">
-                    <a class="btn btn-outline-primary" href="/my/reviews">Мои задачи</a>
+            <div class="d-flex gap-3 my-3 flex-wrap">
+                <div class="">
+                    <a class="btn btn-outline-primary" href="/my/tasks">Мои задачи</a>
                 </div>
-                <div class="px-2">
+                <div class="">
                     <a class="btn btn-outline-primary" href="/settings">Настройки</a>
                 </div>
             </div>
             <div class="d-block m-3">
                 <#if user.isAdmin()>
-                    <div class="d-block m-3">
-                        <a class="btn btn-dark w-100 col-3" href="/admin">Панель администратора</a>
-                    </div>
+                    <a class="btn btn-dark w-100 col-3" href="/admin">Панель администратора</a>
                 </#if>
             </div>
         </div>

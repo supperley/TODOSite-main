@@ -19,6 +19,10 @@ body, .bg-body, .form-control, .border, .bg-light, .navbar-brand,
     color: #fff !important;
 }
 
-.dropdown-item:active {
+.dropdown-item:hover {
     background-color: #464745 !important;
+}
+
+.dropdown-item:active {
+    background-color: #d1cdc7 !important;
 }
