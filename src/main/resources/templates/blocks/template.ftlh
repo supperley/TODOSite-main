@@ -28,6 +28,8 @@
                 integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
                 crossorigin="anonymous"></script>
 
+        <script src="/static/js/main.js"></script>
+
         <title>Планировщик задач</title>
     </head>
     <body>
@@ -53,7 +55,7 @@
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="/" class="nav-link px-2 link-secondary">Домой</a></li>
                     <li><a href="/functions" class="nav-link px-2 link-dark">Функции</a></li>
-                    <li><a href="/about" class="nav-link px-2 link-dark">О нас</a></li>
+                    <li><a href="/about" class="nav-link px-2 link-dark">О приложении</a></li>
                 </ul>
                 <#if user?has_content>
                     <#if user.email??>

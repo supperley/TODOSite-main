@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Objects;
 
 @Controller
 @Slf4j
@@ -28,6 +29,24 @@ public class UserController {
     public String login(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "login";
+    }
+
+    @GetMapping("/forgot_password")
+    public String forgot_password(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        return "forgot-password";
+    }
+
+    @PostMapping("/forgot_password")
+    public String forgotPassword(User user, RedirectAttributes redirectAttrs) {
+        boolean result = userService.forgotPassword(user);
+        if (result) {
+                redirectAttrs.addFlashAttribute("okMessage", "Пароль успешно изменен!");
+        } else {
+                redirectAttrs.addFlashAttribute("errorMessage", "Ошибка при попытке сброса пароля");
+        }
+        redirectAttrs.addFlashAttribute("user", user);
+        return "redirect:/forgot_password";
     }
 
     @GetMapping("/profile")

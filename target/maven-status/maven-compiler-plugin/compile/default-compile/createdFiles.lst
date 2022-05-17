@@ -1,8 +1,8 @@
-com\example\TODO_Site\models\Task.class
 com\example\TODO_Site\services\ImageService.class
 com\example\TODO_Site\services\UserService.class
-com\example\TODO_Site\repositories\TaskRepository.class
-com\example\TODO_Site\services\TaskService.class
 com\example\TODO_Site\controllers\UserController.class
 com\example\TODO_Site\controllers\TaskController.class
+com\example\TODO_Site\models\Task.class
+com\example\TODO_Site\repositories\TaskRepository.class
+com\example\TODO_Site\services\TaskService.class
 com\example\TODO_Site\models\User.class

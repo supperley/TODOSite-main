@@ -98,5 +98,5 @@
             </div>
         </div>
     </div>
-    <script src="/static/js/main.js"></script>
+    <script src="/static/js/settings.js"></script>
 </@t.template>

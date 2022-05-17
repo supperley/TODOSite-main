@@ -12,10 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,16 +52,30 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void changeUserRoles(User user, Map<String, String> form) {
+    public boolean forgotPassword(User user) {
+        User existingUser = userRepository.findByEmail(user.getEmail());
+        log.info("Reset for user: {} {}", user.getEmail(), user.getPhoneNumber());
+        log.info("existingUser: {} {}", existingUser.getId(), existingUser.getName());
+        if (existingUser != null && Objects.equals(existingUser.getPhoneNumber(), user.getPhoneNumber())) {
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(existingUser);
+            log.info("Password was reset successfully!");
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void changeUserRoles(Long userId, String role) {
+        User user = userRepository.getById(userId);
+        log.info("User_before: {}", user.getRoles());
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());
         user.getRoles().clear();
-        for (String key : form.keySet()) {
-            if (roles.contains(key)) {
-                user.getRoles().add(Role.valueOf(key));
-            }
-        }
+        user.getRoles().add(Role.valueOf(role));
+        log.info("User_after: {}", user.getRoles());
         userRepository.save(user);
     }
 

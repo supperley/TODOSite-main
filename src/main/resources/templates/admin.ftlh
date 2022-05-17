@@ -23,4 +23,5 @@
             </#list>
         </table>
     </div>
+    <script src="/static/js/admin.js"></script>
 </@t.template>
