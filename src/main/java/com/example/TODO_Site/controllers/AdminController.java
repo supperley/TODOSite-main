@@ -34,9 +34,10 @@ public class AdminController {
 //        return "redirect:/admin";
 //    }
 
-    @GetMapping("/admin/user/edit/{user}")
-    public String userEdit(@PathVariable("user") User user, Model model) {
-        model.addAttribute("user", user);
+    @GetMapping("/admin/user/edit/{edited_user}")
+    public String userEdit(@PathVariable("edited_user") User edited_user, Model model, Principal principal) {
+        model.addAttribute("user", userService.getUserByPrincipal(principal));
+        model.addAttribute("edited_user", edited_user);
         model.addAttribute("roles", Role.values());
         return "user-edit";
     }
